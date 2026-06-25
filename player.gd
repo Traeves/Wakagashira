@@ -1,36 +1,44 @@
 extends CharacterBody2D
 
-
+## How fast the player moves.
 @export var move_speed = 200.0
+## How much max stamina the player has.
 @export var max_stamina: float = 100.0
+## How sensitive the mouse is (Greater values mean less sensitive).
+@export var swing_deadzone: float = 2.0
+## How fast the player's stamina regenerates.
 @export var stamina_regen_rate: float = 20.0
+## A constant to multiply the mouse movement by to determine the stamina cost of a swing.
 @export var swing_stamina_cost: float = 0.15
-@export var swing_reduction: float = 10.0
+
 
 @onready var sword := $Sword
 @onready var stamina_bar := $StaminaBar
 
 
 var current_stamina: float
-var last_mouse_position : Vector2
+var mouse_direction : Vector2
+var captured : bool = false
+var mouse_delta: Vector2 = Vector2.ZERO
+
 
 func _ready() -> void:
 	current_stamina = max_stamina
-	
 	stamina_bar.max_value = max_stamina
 	stamina_bar.value = current_stamina
-	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func _physics_process(delta: float) -> void:
-	# 1. Get the mouse movement vector
-	var mouse_movement = get_mouse_direction()
-	# 2. Get the magnitude of the swing using .length()
-	var swing_distance = mouse_movement.length()
+	var swing_distance
+	# 1. Get the mouse movement delta since last frame
+	if abs(mouse_delta) > Vector2.ONE * swing_deadzone:
+		swing_distance = mouse_delta.x
+		mouse_delta = Vector2.ZERO
+	else:
+		swing_distance = 0
 	
 	# 3. Apply the stamina drain or stamina regen
-	# We check if swing distance is greater than 1.0 to avoid swining from mouse "jitters"
-	if swing_distance > 1.0:
+	if swing_distance:
 		drain_swing_stamina(swing_distance)
 	else:
 		if current_stamina < max_stamina:
@@ -46,25 +54,33 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	
-
-	sword.rotation += mouse_movement.x * delta
+	sword.rotation += swing_distance * delta
 	
 	
 	move_and_slide()
 
 
-func get_mouse_direction() -> Vector2:
-	var new_mouse_position = get_viewport().get_mouse_position()/4.0
-	var mouse_movement = new_mouse_position - last_mouse_position
-	print(mouse_movement)
-	last_mouse_position = new_mouse_position
-	return mouse_movement
+func _input(event):
+	if event.is_action_pressed("toggle_capture"):
+		toggle_mouse_capture()
 
 
-func drain_swing_stamina(distance : float) -> void:
+func toggle_mouse_capture() -> void:
+	if captured:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	captured = !captured
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Check if the movement is mouse
+	if event is InputEventMouseMotion:
+		mouse_delta = event.relative
+
+
+func drain_swing_stamina(distance: float) -> void:
 	var total_cost = distance * swing_stamina_cost
-	
 	current_stamina -= total_cost
 	current_stamina = clamp(current_stamina, 0.0, max_stamina)
-	
 	stamina_bar.value = current_stamina
