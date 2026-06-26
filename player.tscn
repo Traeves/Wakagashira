@@ -10,7 +10,9 @@ radius = 24.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eyvyl"]
 size = Vector2(10, 53)
 
-[node name="Player" type="CharacterBody2D" unique_id=432388353]
+[node name="Player" type="CharacterBody2D" unique_id=432388353 groups=["player"]]
+collision_mask = 8
+motion_mode = 1
 script = ExtResource("1_i3pqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=372469051]
@@ -23,6 +25,8 @@ texture = ExtResource("1_onrkg")
 
 [node name="Area2D" type="Area2D" parent="Sword" unique_id=466930176]
 position = Vector2(0, -48)
+collision_layer = 8
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/Area2D" unique_id=473748852]
 texture = ExtResource("2_i3pqv")
