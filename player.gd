@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 ## How fast the player moves.
-@export var move_speed = 200.0
+@export var move_speed = 400.0
 ## How much max stamina the player has.
 @export var max_stamina: float = 100.0
 ## How sensitive the mouse is (Greater values mean less sensitive).
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		swing_distance = 0
 	
-	# 3. Apply the stamina drain or stamina regen
+	# 2. Apply the stamina drain or stamina regen
 	if swing_distance:
 		drain_swing_stamina(swing_distance)
 	else:
@@ -49,7 +49,6 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
-		print(direction)
 		velocity = direction.normalized() * move_speed * (current_stamina / max_stamina)
 	else:
 		velocity = Vector2.ZERO
