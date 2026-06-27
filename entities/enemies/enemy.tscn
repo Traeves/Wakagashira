@@ -3,17 +3,16 @@
 [ext_resource type="Script" uid="uid://dsfum5u2ftukr" path="res://entities/enemies/enemy.gd" id="1_msovg"]
 [ext_resource type="PackedScene" uid="uid://cfithnwx1ettw" path="res://entities/bullets/bullet.tscn" id="2_twyc1"]
 [ext_resource type="Texture2D" uid="uid://61jjbdxyhxgh" path="res://entities/player/sprites/placeholder_player.png" id="3_w4yt1"]
-[ext_resource type="Texture2D" uid="uid://drr1u47btcvj5" path="res://entities/player/sprites/placeholder_sword.png" id="4_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b51k2mgrhmcjp" path="res://ui/health_bar.tscn" id="5_twyc1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
-radius = 384.0833
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_h6mmt"]
 radius = 32.01562
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 384.0833
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1583411980 groups=["enemies"]]
 collision_layer = 2
@@ -29,25 +28,24 @@ visible = false
 shape = SubResource("CircleShape2D_yf5fn")
 debug_color = Color(0.96533865, 1.1551381e-06, 0.49022233, 0.41960785)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=322514381]
+[node name="Pivot" type="Node2D" parent="." unique_id=69421609]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot" unique_id=322514381]
 modulate = Color(0.72177464, 0, 0.07895415, 1)
 texture = ExtResource("3_w4yt1")
 
-[node name="Pivot" type="Node2D" parent="." unique_id=69421609]
+[node name="Hurtbox" type="Area2D" parent="Pivot" unique_id=504610278]
+collision_layer = 0
+collision_mask = 4
 
-[node name="GunHolder" type="Node2D" parent="Pivot" unique_id=516851287]
-position = Vector2(40, 0)
-rotation = 1.5707964
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hurtbox" unique_id=765548814]
+shape = SubResource("CircleShape2D_h6mmt")
 
-[node name="Sprite2D" type="Sprite2D" parent="Pivot/GunHolder" unique_id=627371907]
-texture = ExtResource("4_ipr6v")
-offset = Vector2(0, -30)
-
-[node name="DetectionArea" type="Area2D" parent="." unique_id=1762997531]
+[node name="DetectionArea" type="Area2D" parent="Pivot" unique_id=1762997531]
 visible = false
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1076924491]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/DetectionArea" unique_id=1076924491]
 shape = SubResource("CircleShape2D_g4v7s")
 
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2135889005]
@@ -58,11 +56,4 @@ one_shot = true
 offset_top = -44.0
 offset_bottom = -40.0
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=504610278]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=765548814]
-shape = SubResource("CircleShape2D_h6mmt")
-
-[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="Pivot/Hurtbox" to="." method="_on_hurtbox_body_entered"]
