@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://busn1nrextnhf"]
 
 [ext_resource type="Script" uid="uid://dtapvhlaogsvs" path="res://levels/demo_scene.gd" id="1_3q56x"]
+[ext_resource type="PackedScene" uid="uid://bhu788a12qy8c" path="res://entities/floor/floor.tscn" id="2_5r5lx"]
 [ext_resource type="PackedScene" uid="uid://vj135icj6xmu" path="res://entities/player/player.tscn" id="2_b3yjl"]
 [ext_resource type="PackedScene" uid="uid://dgtelltht8y87" path="res://entities/enemies/enemy.tscn" id="3_5r5lx"]
 
 [node name="DemoScene" type="Node" unique_id=2033252439]
 script = ExtResource("1_3q56x")
+
+[node name="Control" parent="." unique_id=270849106 instance=ExtResource("2_5r5lx")]
+mouse_filter = 2
 
 [node name="Player" parent="." unique_id=432388353 instance=ExtResource("2_b3yjl")]
 position = Vector2(1032, 320)
