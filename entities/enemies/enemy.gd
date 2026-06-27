@@ -14,6 +14,8 @@ extends CharacterBody2D
 @onready var muzzle:= $Pivot/Muzzle
 @onready var reload_timer:= $ReloadTimer
 @onready var healthbar:= $HealthBar
+@onready var enemy_animations:= $Pivot/AnimatedSprite2D
+
 
 
 var target: Node2D
@@ -27,6 +29,8 @@ func _ready() -> void:
 	reload_timer.timeout.connect(_on_reload_timeout)
 	health = max_health
 	healthbar.init_health(max_health)
+	enemy_animations.play("default")
+	enemy_animations.stop()
 
 
 func _physics_process(delta: float) -> void:
@@ -68,12 +72,12 @@ func shoot():
 	if reloading:
 		pass
 	else:
+		enemy_animations.play("shoot")
 		var bullet = bullet_scene.instantiate()
 		bullet.global_position = muzzle.global_position
 		bullet.rotation = pivot.rotation
 		get_tree().root.add_child(bullet)
 		bullet.linear_velocity = Vector2.RIGHT.rotated(pivot.rotation) * bullet_speed
-		
 		reload_timer.start(reload_time)
 		reloading = true
 
