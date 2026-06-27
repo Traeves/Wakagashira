@@ -15,46 +15,78 @@ radius = 32.01562
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 384.0833
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_twyc1"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj3y3"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56i32"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(512, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w4yt1"]
 atlas = ExtResource("4_twyc1")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3udgd"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipr6v"]
 atlas = ExtResource("4_twyc1")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gj3y3"]
-atlas = ExtResource("4_twyc1")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_56i32"]
-atlas = ExtResource("4_twyc1")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
-atlas = ExtResource("4_twyc1")
-region = Rect2(512, 0, 128, 128)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w4yt1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ipr6v")
+"texture": SubResource("AtlasTexture_twyc1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gj3y3")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_56i32")
+}],
+"loop": 0,
+"name": &"dead",
+"speed": 5.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4yt1")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sb13e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3udgd")
 }],
-"loop": 1,
-"name": &"default",
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipr6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4yt1")
+}],
+"loop": 0,
+"name": &"shoot",
 "speed": 5.0
 }]
 
