@@ -93,3 +93,11 @@ func drain_swing_stamina(distance: float) -> void:
 	current_stamina -= total_cost
 	current_stamina = clamp(current_stamina, 0.0, max_stamina)
 	stamina_bar.value = current_stamina
+
+
+func _on_sword_body_entered(area: Node2D) -> void:
+	if area.is_in_group("enemies"):
+		var contacted_enemy = area.find_parent("Enemy")
+		if abs(mouse_delta.x) > 5.0:
+			#currently directly supplying mouse delta as damage, may do more math to scale later
+			contacted_enemy.take_damage(mouse_delta.x)

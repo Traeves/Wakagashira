@@ -21,6 +21,7 @@ extends CharacterBody2D
 var target: Node2D
 var reloading: bool = false
 var health: int
+var in_pain: bool = false
 
 
 func _ready() -> void:
@@ -37,11 +38,25 @@ func _physics_process(delta: float) -> void:
 	var can_shoot
 	if target:
 		can_shoot = rotate_to_target()
+		
+	if enemy_animations.is_playing() and enemy_animations.animation == "hurt":
+		in_pain = false
 
+		
+	if in_pain:
+		can_shoot = false
+		
+	
 	if can_shoot:
 		shoot()
 	pass
 
+func take_damage(damage: float) -> void:
+	enemy_animations.stop()
+	enemy_animations.play("hurt")
+	in_pain = true
+	
+	
 
 func _on_detection_area_entered(body: Node2D) -> void:
 	print("Acquired Target")

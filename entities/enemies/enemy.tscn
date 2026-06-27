@@ -31,13 +31,13 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("4_twyc1")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
-atlas = ExtResource("4_twyc1")
-region = Rect2(0, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3udgd"]
 atlas = ExtResource("4_twyc1")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
+atlas = ExtResource("4_twyc1")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipr6v"]
 atlas = ExtResource("4_twyc1")
@@ -69,10 +69,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sb13e")
+"texture": SubResource("AtlasTexture_3udgd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3udgd")
+"texture": SubResource("AtlasTexture_sb13e")
 }],
 "loop": 0,
 "name": &"hurt",
@@ -110,9 +110,9 @@ debug_color = Color(0.96533865, 1.1551381e-06, 0.49022233, 0.41960785)
 modulate = Color(0.72177464, 0, 0.07895415, 1)
 texture = ExtResource("3_w4yt1")
 
-[node name="Hurtbox" type="Area2D" parent="Pivot" unique_id=504610278]
-collision_layer = 0
-collision_mask = 4
+[node name="Hurtbox" type="Area2D" parent="Pivot" unique_id=504610278 groups=["enemies"]]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hurtbox" unique_id=765548814]
 shape = SubResource("CircleShape2D_h6mmt")
@@ -125,6 +125,7 @@ shape = SubResource("CircleShape2D_g4v7s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot" unique_id=1209996215]
 sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"hurt"
 
 [node name="Muzzle" type="Node2D" parent="Pivot" unique_id=1998839521]
 position = Vector2(71, -36)
