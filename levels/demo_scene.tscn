@@ -11,4 +11,4 @@ script = ExtResource("1_3q56x")
 position = Vector2(1032, 320)
 
 [node name="Enemy" parent="." unique_id=1583411980 instance=ExtResource("3_5r5lx")]
-position = Vector2(344, 320)
+position = Vector2(384, 384)
