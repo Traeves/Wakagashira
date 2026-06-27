@@ -61,6 +61,7 @@ toggle_capture={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Sword"
 2d_physics/layer_4="Projectiles"
+2d_physics/layer_5="Environment"
 
 [physics]
 
@@ -68,4 +69,5 @@ toggle_capture={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

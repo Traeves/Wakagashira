@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cfithnwx1ettw" path="res://entities/bullets/bullet.tscn" id="2_twyc1"]
 [ext_resource type="Texture2D" uid="uid://61jjbdxyhxgh" path="res://entities/player/sprites/placeholder_player.png" id="3_w4yt1"]
 [ext_resource type="Texture2D" uid="uid://drr1u47btcvj5" path="res://entities/player/sprites/placeholder_sword.png" id="4_ipr6v"]
+[ext_resource type="PackedScene" uid="uid://b51k2mgrhmcjp" path="res://ui/health_bar.tscn" id="5_twyc1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
 radius = 32.0
@@ -11,16 +12,20 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 384.0833
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6mmt"]
+radius = 32.01562
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1583411980 groups=["enemies"]]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 17
 script = ExtResource("1_msovg")
 turn_speed = 0.2
 trigger_happiness = 0.05
 bullet_scene = ExtResource("2_twyc1")
 metadata/_edit_group_ = true
 
-[node name="HurtBox" type="CollisionShape2D" parent="." unique_id=902581824]
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=902581824]
+visible = false
 shape = SubResource("CircleShape2D_yf5fn")
 debug_color = Color(0.96533865, 1.1551381e-06, 0.49022233, 0.41960785)
 
@@ -39,6 +44,7 @@ texture = ExtResource("4_ipr6v")
 offset = Vector2(0, -30)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1762997531]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1076924491]
@@ -47,3 +53,16 @@ shape = SubResource("CircleShape2D_g4v7s")
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2135889005]
 process_callback = 0
 one_shot = true
+
+[node name="HealthBar" parent="." unique_id=907542355 instance=ExtResource("5_twyc1")]
+offset_top = -44.0
+offset_bottom = -40.0
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=504610278]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=765548814]
+shape = SubResource("CircleShape2D_h6mmt")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
