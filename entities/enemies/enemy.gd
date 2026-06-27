@@ -9,9 +9,9 @@ extends CharacterBody2D
 @export var max_health: int = 100
 
 
-@onready var detection_area:= $DetectionArea
+@onready var detection_area:= $Pivot/DetectionArea
 @onready var pivot:= $Pivot
-@onready var muzzle:= $Pivot/GunHolder
+@onready var muzzle:= $Pivot/Muzzle
 @onready var reload_timer:= $ReloadTimer
 @onready var healthbar:= $HealthBar
 

@@ -95,6 +95,9 @@ shape = SubResource("CircleShape2D_g4v7s")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot" unique_id=1209996215]
 sprite_frames = SubResource("SpriteFrames_yf5fn")
 
+[node name="Muzzle" type="Node2D" parent="Pivot" unique_id=1998839521]
+position = Vector2(71, -36)
+
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2135889005]
 process_callback = 0
 one_shot = true
