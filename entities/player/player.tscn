@@ -8,63 +8,47 @@
 atlas = ExtResource("2_sglur")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8fjmc"]
-atlas = ExtResource("2_sglur")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qiwj3"]
-atlas = ExtResource("2_sglur")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_26q78"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sglur"]
 atlas = ExtResource("2_sglur")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bectd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bls4j"]
 atlas = ExtResource("2_sglur")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wvtmh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fjmc"]
 atlas = ExtResource("2_sglur")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7thud"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiwj3"]
 atlas = ExtResource("2_sglur")
 region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a1qjk"]
-atlas = ExtResource("2_sglur")
-region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fkugw")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sglur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bls4j")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8fjmc")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qiwj3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_26q78")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bectd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wvtmh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7thud")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a1qjk")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"low_stamina",
 "speed": 5.0
 }]
 
@@ -85,6 +69,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot" unique_id=2134216691]
 sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"low_stamina"
 
 [node name="Area2D" type="Area2D" parent="Pivot" unique_id=580777104]
 position = Vector2(48, 0)
