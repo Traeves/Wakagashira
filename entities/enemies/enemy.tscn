@@ -118,7 +118,6 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_h6mmt")
 
 [node name="DetectionArea" type="Area2D" parent="Pivot" unique_id=1762997531]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/DetectionArea" unique_id=1076924491]
