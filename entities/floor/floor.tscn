@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bhu788a12qy8c"]
+
+[ext_resource type="Texture2D" uid="uid://dnvgowr0kovg3" path="res://entities/floor/sprites/floor.png" id="1_fm80d"]
+
+[node name="Control" type="Control" unique_id=270849106]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=261717283]
+layout_mode = 0
+offset_right = 1299.0
+offset_bottom = 739.0
+texture = ExtResource("1_fm80d")
+expand_mode = 1
+stretch_mode = 1
