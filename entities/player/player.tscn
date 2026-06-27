@@ -7,15 +7,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vrve5"]
 radius = 24.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i3pqv"]
-friction = 0.0
-bounce = 1.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eyvyl"]
 size = Vector2(10, 53)
 
 [node name="Player" type="CharacterBody2D" unique_id=432388353 groups=["player"]]
-collision_mask = 8
+collision_mask = 26
 motion_mode = 1
 script = ExtResource("1_sglur")
 swing_speed = 10.0
@@ -29,19 +25,17 @@ texture = ExtResource("2_bls4j")
 
 [node name="SwordPivot" type="Node2D" parent="." unique_id=1197801649]
 
-[node name="Area2D" type="RigidBody2D" parent="SwordPivot" unique_id=2073408532]
+[node name="SwordArea" type="Area2D" parent="SwordPivot" unique_id=204510778]
 position = Vector2(48, 0)
 rotation = 1.5707964
 collision_layer = 4
-collision_mask = 8
-physics_material_override = SubResource("PhysicsMaterial_i3pqv")
-gravity_scale = 0.0
+collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="SwordPivot/Area2D" unique_id=473748852]
+[node name="Sprite2D" type="Sprite2D" parent="SwordPivot/SwordArea" unique_id=473748852]
 texture = ExtResource("3_fkugw")
 offset = Vector2(0, -20)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordPivot/Area2D" unique_id=100532373]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordPivot/SwordArea" unique_id=100532373]
 position = Vector2(0, -32.5)
 shape = SubResource("RectangleShape2D_eyvyl")
 

@@ -1,33 +1,39 @@
 extends CharacterBody2D
 
-@export var reload_time : float = 1.0
-@export var turn_speed : float = 0.1
-@export var trigger_happiness : float = 0.01
-@export var bullet_speed : float = 1000.0
-@export var bullet_scene : PackedScene
 
-@onready var detection_area := $DetectionArea
-@onready var pivot := $Pivot
-@onready var muzzle := $Pivot/GunHolder
+@export var reload_time: float = 1.0
+@export var turn_speed: float = 0.1
+@export var trigger_happiness: float = 0.01
+@export var bullet_speed: float = 1000.0
+@export var bullet_scene: PackedScene
+@export var max_health: int = 100
+
+
+@onready var detection_area:= $DetectionArea
+@onready var pivot:= $Pivot
+@onready var muzzle:= $Pivot/GunHolder
 @onready var reload_timer:= $ReloadTimer
+@onready var healthbar:= $HealthBar
 
 
-var target : Node2D
-var reloading : bool = false
+var target: Node2D
+var reloading: bool = false
+var health: int
 
 
 func _ready() -> void:
 	detection_area.body_entered.connect(_on_detection_area_entered)
 	detection_area.body_exited.connect(_on_detection_area_exited)
 	reload_timer.timeout.connect(_on_reload_timeout)
-	pass
+	health = max_health
+	healthbar.init_health(max_health)
 
 
 func _physics_process(delta: float) -> void:
 	var can_shoot
 	if target:
 		can_shoot = rotate_to_target()
-	
+
 	if can_shoot:
 		shoot()
 	pass
@@ -70,3 +76,16 @@ func shoot():
 		
 		reload_timer.start(reload_time)
 		reloading = true
+
+
+
+
+func _set_health(value: int) -> void:
+	healthbar.health = health
+	
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print("ouch")
+	health -= 20
+	_set_health(health)
