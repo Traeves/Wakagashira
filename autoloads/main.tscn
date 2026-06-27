@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d2h5y0otataqc"]
+
+[node name="Main" type="Node" unique_id=1757575250]
+
+[node name="GameUI" type="CanvasLayer" parent="." unique_id=941955908]
+
+[node name="AudioManager" type="Node" parent="." unique_id=481122553]
+
+[node name="SceneManager" type="CanvasLayer" parent="." unique_id=182801968]
+
+[node name="ColorRect" type="ColorRect" parent="SceneManager" unique_id=481294969]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneManager" unique_id=1239613585]
+
+[node name="EnvironmentHost" type="Node2D" parent="." unique_id=382867029]
