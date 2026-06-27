@@ -39,12 +39,13 @@ func _on_detection_area_entered(body: Node2D) -> void:
 
 
 func _on_reload_timeout() -> void:
-	print("Reloaded")
 	reloading = false
+
 
 func _on_detection_area_exited(_body: Node2D) -> void:
 	print("Lost Target")
 	target = null
+
 
 func rotate_to_target() -> bool:
 	var angle_to_target = get_angle_to(target.global_position)
@@ -54,7 +55,6 @@ func rotate_to_target() -> bool:
 	if rotation_delta < trigger_happiness:
 		return true
 	else:
-
 		return false
 
 
@@ -62,8 +62,6 @@ func shoot():
 	if reloading:
 		pass
 	else:
-		print("Shooting")
-		
 		var bullet = bullet_scene.instantiate()
 		bullet.global_position = muzzle.global_position
 		bullet.rotation = pivot.rotation

@@ -10,16 +10,20 @@ extends CharacterBody2D
 @export var stamina_regen_rate: float = 20.0
 ## A constant to multiply the mouse movement by to determine the stamina cost of a swing.
 @export var swing_stamina_cost: float = 0.15
+## How far the sword goes when the mouse is moved.
+@export var swing_sensitivity: float = 0.02
+## How fast the sword catches up with mouse movement
+@export var swing_speed: float = 20.0
 
 
-@onready var sword := $Sword
-@onready var stamina_bar := $StaminaBar
+@onready var sword:= $SwordPivot
+@onready var stamina_bar:= $StaminaBar
 
 
 var current_stamina: float
-var mouse_direction : Vector2
-var captured : bool = false
+var captured: bool = false
 var mouse_delta: Vector2 = Vector2.ZERO
+var target_angle: float = 0.0
 
 
 func _ready() -> void:
@@ -29,22 +33,23 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var swing_distance
-	# 1. Get the mouse movement delta since last frame
-	if abs(mouse_delta) > Vector2.ONE * swing_deadzone:
-		swing_distance = mouse_delta.x
-		mouse_delta = Vector2.ZERO
-	else:
-		swing_distance = 0
-	
-	# 2. Apply the stamina drain or stamina regen
-	if swing_distance:
+	# 1. Get the swing distance
+	var swing_distance = abs(mouse_delta.x)
+	# Deadzone checking to prevent micro jitters from draining stamina
+	if swing_distance > swing_deadzone:
+		# 2. Drain the stamina according to the swing distance
 		drain_swing_stamina(swing_distance)
+		# 3. Apply the drag to the target angle
+		target_angle += mouse_delta.x * swing_sensitivity
+	# If swing distance is zero or too small we regen stamina
 	else:
 		if current_stamina < max_stamina:
 			current_stamina += stamina_regen_rate * delta
 			current_stamina = clamp(current_stamina, 0.0, max_stamina)
 			stamina_bar.value = current_stamina
+	# 4. Apply the smooth rotation to the sword
+	sword.rotation = lerp_angle(sword.rotation, target_angle, swing_speed * delta)
+	
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_vector("left", "right", "up", "down")
@@ -52,8 +57,6 @@ func _physics_process(delta: float) -> void:
 		velocity = direction.normalized() * move_speed * (current_stamina / max_stamina)
 	else:
 		velocity = Vector2.ZERO
-	
-	sword.rotation += swing_distance * delta
 	
 	
 	move_and_slide()
@@ -79,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func drain_swing_stamina(distance: float) -> void:
-	var total_cost = distance * swing_stamina_cost
+	var total_cost = abs(distance) * swing_stamina_cost
 	current_stamina -= total_cost
 	current_stamina = clamp(current_stamina, 0.0, max_stamina)
 	stamina_bar.value = current_stamina
