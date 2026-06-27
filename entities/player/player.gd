@@ -18,6 +18,7 @@ extends CharacterBody2D
 
 @onready var pivot:= $Pivot
 @onready var stamina_bar:= $StaminaBar
+@onready var player_animations:= $Pivot/AnimatedSprite2D
 
 
 var current_stamina: float
@@ -47,6 +48,12 @@ func _physics_process(delta: float) -> void:
 			current_stamina += stamina_regen_rate * delta
 			current_stamina = clamp(current_stamina, 0.0, max_stamina)
 			stamina_bar.value = current_stamina
+	# 3.5 Trigger the sleepy animation if stamina is less than a cutoff (20 for now)
+	if current_stamina < 20.0:
+		player_animations.play("low_stamina")
+	else:
+		player_animations.play("default")
+		player_animations.stop()
 	# 4. Apply the smooth rotation to the sword
 	pivot.rotation = lerp_angle(pivot.rotation, target_angle, swing_speed * delta)
 	
