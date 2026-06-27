@@ -16,7 +16,7 @@ extends CharacterBody2D
 @export var swing_speed: float = 20.0
 
 
-@onready var sword:= $SwordPivot
+@onready var pivot:= $Pivot
 @onready var stamina_bar:= $StaminaBar
 
 
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			current_stamina = clamp(current_stamina, 0.0, max_stamina)
 			stamina_bar.value = current_stamina
 	# 4. Apply the smooth rotation to the sword
-	sword.rotation = lerp_angle(sword.rotation, target_angle, swing_speed * delta)
+	pivot.rotation = lerp_angle(pivot.rotation, target_angle, swing_speed * delta)
 	
 	
 	# Get the input direction and handle the movement/deceleration.
