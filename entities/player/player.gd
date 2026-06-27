@@ -21,7 +21,6 @@ extends CharacterBody2D
 
 
 var current_stamina: float
-var captured: bool = false
 var mouse_delta: Vector2 = Vector2.ZERO
 var target_angle: float = 0.0
 
@@ -60,19 +59,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 	move_and_slide()
-
-
-func _input(event):
-	if event.is_action_pressed("toggle_capture"):
-		toggle_mouse_capture()
-
-
-func toggle_mouse_capture() -> void:
-	if captured:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	captured = !captured
 
 
 func _unhandled_input(event: InputEvent) -> void:
