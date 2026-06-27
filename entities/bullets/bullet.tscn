@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cfithnwx1ettw"]
 
 [ext_resource type="Script" uid="uid://ci3gkowe4xqwa" path="res://entities/bullets/bullet.gd" id="1_33ckv"]
-[ext_resource type="Texture2D" uid="uid://61jjbdxyhxgh" path="res://entities/player/sprites/placeholder_player.png" id="2_a3f0k"]
+[ext_resource type="Texture2D" uid="uid://b7j0hmi0rgki7" path="res://entities/bullets/sprites/bullet.png" id="2_33ckv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v8qja"]
 friction = 0.1
@@ -27,9 +27,9 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_iifgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1434589600]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.9941079, 0.9941079, 0.9941079, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_a3f0k")
+texture = ExtResource("2_33ckv")
 
 [node name="LifetimeTimer" type="Timer" parent="." unique_id=893925947]
 process_callback = 0
